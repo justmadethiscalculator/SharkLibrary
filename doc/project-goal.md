@@ -7,7 +7,6 @@
 - **Download System:** Allow users to search, filter, and download available books in PDF format.  
 - **Responsive Design:** Ensure the website is accessible on different devices.  
 - **Interactive Elements:** Include animations and user-friendly navigation.  
-- **User Authentication:** Log-in and sign-up.  
 - **Comments and Reviews:** User-generated content.
 
 ---
