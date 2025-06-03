@@ -1,4 +1,28 @@
+<?php
+$host = "localhost";
+$username = "admin";        // Change if necessary
+$password = "adminpass";            // Change if your MariaDB has a password
+$database = "librarydb";
+
+// Connect to the database
+$conn = new mysqli($host, $username, $password, $database);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Increase the visit count
+$conn->query("UPDATE visitcount SET visit_count = visit_count + 1");
+
+// Get the updated count
+$result = $conn->query("SELECT visit_count FROM visitcount");
+$row = $result->fetch_assoc();
+$visit_count = $row['visit_count'];
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 	<title>Welcome to Shark's Library</title>
@@ -9,7 +33,7 @@
 	*{
 		font-family: arial, sans-serif; <!--Example of embedded CSS: Make all font in this file to the defined type -->
 	}
-	</style>
+</style>
 
 <body>
 <header style="height: 120px"> <!--Example of inline CSS-->
@@ -25,6 +49,10 @@
 			</a>
 			<img src="images/home_shark.png" alt="Shark that's waving its arms" class="home-shark fade-in longer" id="image4">
 		</div>
+	</section>
+	<section id="counter">
+		<div class="container">
+			<p style="text-align:center;">This website has been visited <?php echo $visit_count; ?> times.</p>
 	</section>
 	<section id="preview">
 		<div class="container">

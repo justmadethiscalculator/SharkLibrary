@@ -69,6 +69,7 @@ All data is pulled dynamically from a database.
 | bookID          | INT          | Primary key                |
 | title           | VARCHAR(255) | Book title                 |
 | description     | TEXT         | Book description           |
+| author          | VARCHAR(255) | Book's author              |
 | category        | VARCHAR(25)  | Book category              |
 | file_path       | VARCHAR(255) | Path to PDF file           |
 | image_path      | VARCHAR(255) | Path to cover image        |
