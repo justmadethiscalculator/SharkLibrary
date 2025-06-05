@@ -35,7 +35,7 @@ sudo apt install mariadb-server php-mysql
 If you have not already, download or clone the SharkLibrary project to your Pi:
 
 ```sh
-git clone <repository-url>
+git clone <https://github.com/justmadethiscalculator/SharkLibrary.git>
 ```
 
 Or copy the files to your Pi using SCP or a USB drive.
