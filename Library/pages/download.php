@@ -1,8 +1,66 @@
+<?php
+$host = "localhost";
+$username = "root";        // Change if necessary
+$password = "";            // Change if your MariaDB has a password
+$database = "librarydb";
+
+// Connect to the database
+$conn = new mysqli($host, $username, $password, $database);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Handle search
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+$category = isset($_GET['category']) ? $_GET['category'] : 'all';
+
+// Handle download request
+if (isset($_GET['download'])) {
+    $bookID = $_GET['download'];
+    downloadBook($bookID, $conn);
+}
+
+function downloadBook($bookID, $conn) {
+    $sql = "SELECT file_path, title FROM book WHERE bookID = $bookID";
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $relative_path = $row['file_path'];
+        $title = $row['title'];
+        
+        // Build absolute path - go up one directory from pages/ to Library/, then to books/
+        $file_path = "../" . $relative_path;
+        
+        // Add download_count update
+        $update_sql = "UPDATE book SET download_count = download_count + 1 WHERE bookID = $bookID";
+        $conn->query($update_sql);
+        
+        if (file_exists($file_path)) {
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: attachment; filename="'.basename($title).'.pdf"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($file_path));
+            readfile($file_path);
+            exit;
+        } else {
+            echo "<script>alert('File not found: " . htmlspecialchars($file_path) . "');</script>";
+        }
+    } else {
+        echo "<script>alert('Book not found in database.');</script>";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Downloads - Shark's Library</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/download.css">
 </head>
 <body>
 <header>
@@ -12,39 +70,40 @@
 <main>
     <section id="top-button">
         <div class="button-row">
-            <button onclick="location.href='../index.html'">Back to Home</button>
+            <button onclick="location.href='../index.php'">Back to Home</button>
             <button onclick="location.href='about.html'">About Us</button>
-            <button onclick="location.href='preview.html'">Previews</button>
-            <button onclick="location.href='download.html'">Downloads</button>
+            <button onclick="location.href='previews.php'">Previews</button>
+            <button onclick="location.href='download.php'">Downloads</button>
         </div>
     </section>
     
     <section id="download-section">
         <h1 class="text title">Downloads</h1>
-        
-        <div class="download-controls">
+        <form method="GET" action="download.php" class="download-controls">
             <div class="search-box">
-                <input type="text" id="search-input" placeholder="search">
-                <button id="search-btn">enter</button>
+                <input type="text" name="search" id="search-input" placeholder="Search books..." value="<?php echo htmlspecialchars($search); ?>">
+                <button type="submit" id="search-btn">Search</button>
             </div>
             
             <div class="filter-options">
                 <label for="category-filter">Filter by:</label>
-                <select id="category-filter">
-                    <option value="all">All Categories</option>
-                    <option value="fiction">Fiction</option>
-                    <option value="non-fiction">Non-Fiction</option>
-                    <option value="science">Science</option>
-                    <option value="history">History</option>
+                <select name="category" id="category-filter">
+                    <option value="all" <?php echo $category == 'all' ? 'selected' : ''; ?>>All Categories</option>
+                    <option value="fiction" <?php echo $category == 'fiction' ? 'selected' : ''; ?>>Fiction</option>
+                    <option value="non-fiction" <?php echo $category == 'non-fiction' ? 'selected' : ''; ?>>Non-Fiction</option>
+                    <option value="science" <?php echo $category == 'science' ? 'selected' : ''; ?>>Science</option>
+                    <option value="history" <?php echo $category == 'history' ? 'selected' : ''; ?>>History</option>
                 </select>
                 
                 <label for="sort-by">Sort by:</label>
-                <select id="sort-by">
+                <select name="sort" id="sort-by">
                     <option value="title-asc">Title (A-Z)</option>
                     <option value="title-desc">Title (Z-A)</option>
+                    <option value="downloads-high">Downloads (High-Low)</option>
+                    <option value="downloads-low">Downloads (Low-High)</option>
                 </select>
             </div>
-        </div>
+        </form>
         
         <div class="download-table-container">
             <table class="download-table">
@@ -54,93 +113,57 @@
                         <th>Title</th>
                         <th>Author</th>
                         <th>Category</th>
-                        <th>File Size</th>
+                        <th>Downloads</th>
                         <th>Format</th>
                         <th>Download</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td><img src="../images/c1.jpg" alt="Cover of 'Jaws' by Peter Benchley" class="table-cover"></td>
-                        <td>Jaws</td>
-                        <td>Peter Benchley</td>
-                        <td>Fiction</td>
-                        <td>2MB "At least 2 sharks"</td>
-                        <td>PDF</td>
-                        <td><button class="download-btn">Download</button></td>
-                    </tr>
-                    <tr>
-                        <td><img src="../images/c2.jpg" alt="Cover of 'The Secret History of Sharks' by John A. Long" class="table-cover"></td>
-                        <td>The Secret History of Sharks: The Rise of the Ocean's Most Fearsome Predators</td>
-                        <td>John A. Long</td>
-                        <td>History</td>
-                        <td>1MB "There is a shark"</td>
-                        <td>PDF</td>
-                        <td><button class="download-btn">Download</button></td>
-                    </tr>
-                    <tr>
-                        <td><img src="../images/c3.jpg" alt="Cover of 'Everything You Know About Sharks is Wrong!' by Peter Nick Crumpton & Gavin Scott" class="table-cover"></td>
-                        <td>Everything You Know About Sharks is Wrong!</td>
-                        <td>Nick Crumpton & Gavin Scott</td>
-                        <td>Non-Fiction</td>
-                        <td>5MB "That's a lot of sharks"</td>
-                        <td>PDF</td>
-                        <td><button class="download-btn">Download</button></td>
-                    </tr>
-                    <tr>
-                        <td><img src="../images/c4.jpg" alt="Cover of 'Why Sharks Matter' by David Shiffman" class="table-cover"></td>
-                        <td>Why Sharks Matter: A Deep Dive with the World's Most Misunderstood Predator</td>
-                        <td>David Shiffman</td>
-                        <td>Science</td>
-                        <td>1MB "At least 1 shark"</td>
-                        <td>PDF</td>
-                        <td><button class="download-btn">Download</button></td>
-                    </tr>
-                    <tr>
-                        <td><img src="../images/c5.jpg" alt="Cover of 'Who Would Win? Killer Whale vs. Great White Shark' by Jerry Pallotta" class="table-cover"></td>
-                        <td>Who Would Win? Killer Whale vs. Great White Shark</td>
-                        <td>Jerry Pallotta</td>
-                        <td>Non-Fiction</td>
-                        <td>1MB "The shark won :D"</td>
-                        <td>PDF</td>
-                        <td><button class="download-btn">Download</button></td>
-                    </tr>
-					<tr>
-                        <td><img src="../images/c6.jpg" alt="Cover of 'Marine Biology 5th Edition' by Jeffrey Levinton" class="table-cover"></td>
-                        <td>Marine Biology: Function, Biodiversity, Ecology 5th Edition</td>
-                        <td>Jeffrey Levinton</td>
-                        <td>Science</td>
-                        <td>1TB "Woah"</td>
-                        <td>PDF</td>
-                        <td><button class="download-btn">Download</button></td>
-                    </tr>
-					<tr>
-                        <td><img src="../images/c7.jpg" alt="Cover of 'Marine Biology 11th Edition' by Peter Castro & Michael Huber" class="table-cover"></td>
-                        <td>Marine Biology 11th Edition</td>
-                        <td>Peter Castro & Michael Huber</td>
-                        <td>Science</td>
-                        <td>6TB "6+5=11"</td>
-                        <td>PDF</td>
-                        <td><button class="download-btn">Download</button></td>
-                    </tr>
-					<tr>
-                        <td><img src="../images/c8.jpeg" alt="Cover of 'Shark Lady' by Jess Keatin" class="table-cover"></td>
-                        <td>Shark Lady: The True Story of How Eugenie Clark Became the Ocean's Most Fearless Scientist</td>
-                        <td>Jess Keating</td>
-                        <td>Non-Fiction</td>
-                        <td>1MB "Nice shark"</td>
-                        <td>PDF</td>
-                        <td><button class="download-btn">Download</button></td>
-                    </tr>
-					<tr>
-                        <td><img src="../images/c9.jpg" alt="Cover of 'Shark vs. Train' by Chris Barton" class="table-cover"></td>
-                        <td>Shark vs. Train</td>
-                        <td>Chris Barton</td>
-                        <td>Fiction</td>
-                        <td>0MB "The shark lost :C"</td>
-                        <td>PDF</td>
-                        <td><button class="download-btn">Download</button></td>
-                    </tr>
+                <tbody>                    <?php
+                    // Build SQL query based on search and filters
+                    $sql = "SELECT * FROM book WHERE 1=1";
+                    
+                    if (!empty($search)) {
+                        $sql .= " AND (title LIKE '%$search%' OR description LIKE '%$search%')";
+                    }
+                    
+                    if ($category != 'all') {
+                        $sql .= " AND category = '$category'";
+                    }
+                    
+                    // Add sorting
+                    $sort = isset($_GET['sort']) ? $_GET['sort'] : 'title-asc';
+                    switch ($sort) {
+                        case 'title-desc':
+                            $sql .= " ORDER BY title DESC";
+                            break;
+                        case 'downloads-high':
+                            $sql .= " ORDER BY download_count DESC";
+                            break;
+                        case 'downloads-low':
+                            $sql .= " ORDER BY download_count ASC";
+                            break;
+                        default:
+                            $sql .= " ORDER BY title ASC";
+                    }
+                    
+                    $result = $conn->query($sql);
+                    
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            echo "<tr>
+                                <td><img src='../" . htmlspecialchars($row['image_path']) . "' alt='Book Cover' class='table-cover'></td>
+                                <td>" . htmlspecialchars($row['title']) . "</td>
+                                <td>" . htmlspecialchars($row['author']) . "</td>
+                                <td>" . htmlspecialchars($row['category']) . "</td>
+                                <td>" . htmlspecialchars($row['download_count']) . "</td>
+                                <td>PDF</td>
+                                <td><a href='download.php?download=" . $row['bookID'] . "' class='download-btn'>Download</a></td>
+                            </tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='7'>No books found</td></tr>";
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
@@ -150,7 +173,7 @@
 <footer>
     <p>© Copyright 2025 Jawsome Co LTd.</p>
 </footer>
-
-<script src="../js/script.js"></script>
 </body>
 </html>
+
+<?php $conn->close(); ?>
