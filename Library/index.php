@@ -14,9 +14,14 @@ if ($conn->connect_error) {
 $conn->query("UPDATE visitcount SET visit_count = visit_count + 1");
 
 // Get the updated count
-$result = $conn->query("SELECT visit_count FROM visitcount");
-$row = $result->fetch_assoc();
-$visit_count = $row['visit_count'];
+$visit_update = $conn->query("SELECT visit_count FROM visitcount");
+$row_visit = $visit_update->fetch_assoc();
+$visit_count = $row_visit['visit_count'];
+
+// Get the total downloads
+$download_update = $conn->query("SELECT SUM(download_count) AS total_downloads FROM book");
+$row_download = $download_update->fetch_assoc();
+$download_count = $row_download['total_downloads'] ?? 0;
 
 $conn->close();
 ?>
@@ -52,11 +57,11 @@ $conn->close();
 	</section>
 	<section id="counter">
 		<div class="container">
-			<p style="text-align:center;">This website has been visited <?php echo $visit_count; ?> times.</p>
+			<p style="text-align:center;"> <?php echo $visit_count; ?> VISITORS | <?php echo $download_count; ?> DOWNLOADS</p>
 	</section>
 	<section id="preview">
 		<div class="container">
-			<a href="pages/preview.html">
+			<a href="pages/preview.php">
 				<img src="images/preview_button.png" alt="previews" class="home-button hpreview about img-right fade-in"id="image2">
 			</a>
 			<div class="textwrapper-home">
@@ -73,7 +78,7 @@ $conn->close();
 	</section>
 	<section id="download">
 		<div class="container">
-			<a href="pages/download.html">
+			<a href="pages/download.php">
 				<img src="images/download_button.png" alt="downloads" class="home-button hdownload fade-in" id="image3">
 			</a>
 			<div class="textwrapper-home text-right">
