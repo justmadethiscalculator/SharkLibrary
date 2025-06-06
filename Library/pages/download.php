@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
-$username = "root";        // Change if necessary
-$password = "";            // Change if your MariaDB has a password
+$username = "admin";        // Change if necessary
+$password = "adminpass";            // Change if your MariaDB has a password
 $database = "librarydb";
 
 // Connect to the database
