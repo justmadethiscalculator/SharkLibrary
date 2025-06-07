@@ -7,7 +7,22 @@ Follow these steps to install and run SharkLibrary on your Raspberry Pi Zero 2.
 - **Raspberry Pi Zero 2** with Raspberry Pi OS (or any Debian-based Linux)
 - **PHP 7.4 or higher** (for running the web application)
 - **A web browser** (e.g., Chromium, Firefox)
-- (Optional) **MariaDB/MySQL** if you want to use the sample database
+- **MariaDB 10.x** (to use the sample database)
+
+## 1. Copy The Files to The Raspberry Pi
+
+Open a terminal command prompt on your pc:
+Use the following command
+
+```sh
+scp -r <path_to_file_on_pc>\* <user>@<raspberry_pi_ip_address>:/var/www/html/.
+```
+
+For example:
+```sh
+scp -r "C:\Users\me\Downloads\Library\*" root@192.168.141.122:/var/www/html/
+```
+You may be prompted for the Raspberry Pi user's password: (usually "raspberry", "dietpi" or the password you set). 
 
 ## 1. Update Your System
 
@@ -40,7 +55,7 @@ git clone <https://github.com/justmadethiscalculator/SharkLibrary.git>
 
 Or copy the files to your Pi using SCP or a USB drive.
 
-## 4. (Optional) Set Up the Database
+## 4. Set Up the Database
 
 If you want to use the sample database, import it:
 
@@ -51,9 +66,9 @@ sudo mariadb
 Then in the MariaDB prompt:
 
 ```sql
-CREATE DATABASE sharklibrary;
-USE sharklibrary;
-SOURCE /path/to/SharkLibrary/database/librarydb.sql;
+CREATE DATABASE librarydb;
+USE librarydb;
+SOURCE /path/to/librarydb/database/librarydb.sql;
 ```
 
 Update your PHP config if needed to point to your database.
