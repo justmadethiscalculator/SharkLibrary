@@ -57,7 +57,7 @@ $conn->close();
 	</section>
 	<section id="counter">
 		<div class="container">
-			<p style="text-align:center;"> <?php echo $visit_count; ?> VISITORS | <?php echo $download_count; ?> DOWNLOADS</p>
+			<p style="text-align:center;"> <?php echo $visit_count; ?> VISITS | <?php echo $download_count; ?> DOWNLOADS</p>
 	</section>
 	<section id="preview">
 		<div class="container">
