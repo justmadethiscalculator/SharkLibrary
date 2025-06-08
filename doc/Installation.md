@@ -141,6 +141,12 @@ To remove SharkLibrary:
 ``` sh
 sudo rm -rf /var/www/html/*
 ```
+**WARNING**: When deleting folders, always double-check your path before pressing Enter.
+For example, you can use:
+``` sh
+echo rm -rf /var/www/html/*
+```
+To preview what will be run.
 
 To remove installed packages (optional):
 ``` sh
