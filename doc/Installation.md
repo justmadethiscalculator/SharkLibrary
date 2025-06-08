@@ -24,7 +24,7 @@ sudo apt upgrade
 sudo apt install apache2 -y
 sudo apt install php php-mysql
 sudo apt install mariadb-server -y
-sudo apt install git -y //Optional: If you want to copy files through github
+sudo apt install git -y # Optional: If you want to copy files through github
 ```
 
 Verify installation:
@@ -46,7 +46,7 @@ cd /var/www/html
 git clone <https://github.com/justmadethiscalculator/SharkLibrary.git>
 ```
 
-For convinience, move all the files and folders
+For convenience, move all the files and folders
 ```sh
 sudo mv /var/www/html/SharkLibrary/Library/* /var/www/html/
 ```
@@ -90,7 +90,7 @@ To import the database using the sql file:
 In the MariaDB shell:
 ```sql
 USE librarydb;
-SOURCE /path/to/librarydb/database/librarydb.sql;
+SOURCE /var/www/html/database/librarydb.sql;
 ```
 
 ## Option 2 (One-liner in Shell, outside MariaDB)
