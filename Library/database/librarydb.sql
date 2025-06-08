@@ -1,4 +1,4 @@
--- --------------------------------------------------------
+r-- --------------------------------------------------------
 -- Tested Using:
 -- Host:                         127.0.0.1
 -- Server version:               11.7.2-MariaDB - mariadb.org binary distribution
@@ -43,7 +43,7 @@ INSERT INTO `book` (`bookID`, `title`, `description`, `author`, `category`, `fil
 	(6, 'Marine Biology: Function, Biodiversity, Ecology 5th Edition', 'This book is regarded by many as the most authoritative marine biology text that has balanced organismal and ecological focus by including the latest developments on molecular biology, global climate change, and ocean processes.', 'Jeffrey Levinton', 'Science', 'books/marine_biology_ecology_5th_edition.pdf', 'images/covers/marine_biology_ecology_5th_edition.jpg', 0),
 	(7, 'Marine Biology 11th Edition', 'Marine Biology covers the basics of marine biology with a global approach, using examples from numerous regions and ecosystems worldwide. This introductory, one-semester text is designed for non-majors. ', 'Peter Castro & Michael Huber', 'Science', 'book/marine_biology_11th_edition.pdf', 'images/covers/marine_biology_11th_edition.jpg', 0),
 	(8, 'Shark Lady: The True Story of How Eugenie Clark Became the Ocean\'s Most Fearless Scientist', 'This is the story of a woman who dared to dive, defy, discover, and inspire. This is the story of Shark Lady. One of the best science picture books for children, Shark Lady is a must for both teachers and parents alike!', 'Jess Keating', 'Non-Fiction', 'books/shark_lady.pdf', 'images/covers/shark_lady_cover.jpeg', 0),
-	(9, 'Shark vs. Train', 'If you think Superman vs. Batman would be an exciting matchup, wait until you see Shark vs. Train. In this hilarious and wacky picture book, Shark and Train egg each other on for one competition after another!', 'Chris Barton', 'Fiction', 'books/shark_vs_train.pdf', 'images/covers/shark_vs_train.jpg', 0);
+	(9, 'Shark vs. Train', 'If you think Superman vs. Batman would be an exciting matchup, wait until you see Shark vs. Train. In this hilarious and wacky picture book, Shark and Train egg each other on for one competition after another!', 'Chris Barton', 'Fiction', 'books/shark_vs_train.pdf', 'images/covers/shark_vs_train_cover.jpg', 0);
 
 -- Dumping structure for table librarydb.comment
 CREATE TABLE IF NOT EXISTS `comment` (
