@@ -1,6 +1,7 @@
 # SharkLibrary Installation Guide (Raspberry Pi Zero 2)
 
 Follow these steps to install and run SharkLibrary on your Raspberry Pi Zero 2.
+Note: This guide assumes that the user has logged in using the 'root' user, please adjust accordingly
 
 ## Prerequisites
 
@@ -9,101 +10,138 @@ Follow these steps to install and run SharkLibrary on your Raspberry Pi Zero 2.
 - **A web browser** (e.g., Chromium, Firefox)
 - **MariaDB 10.x** (to use the sample database)
 
-## 1. Copy The Files to The Raspberry Pi
+## 1. Update Your System
 
-Open a terminal command prompt on your pc:
-Use the following command
+Open the terminal (through PuTTY or other means), login into the system and run:
+```sh
+sudo apt update
+sudo apt upgrade
+```
 
+## 2. Install The Required Packages
+
+```sh
+sudo apt install apache2 -y
+sudo apt install php php-mysql
+sudo apt install mariadb-server -y
+```
+
+Verify installation:
+```sh
+sudo systemctl status apache2
+php -v
+sudo systemctl status mariadb
+```
+
+## 3. Download or Copy The Files to The Raspberry Pi
+
+If you have not already, download or clone the SharkLibrary project to your Pi:
+-------------------------------------------------------------------------------------------------------------------------------
+## Option 1: Clone from GitHub
+In the raspberry pi's terminal: 
+```sh
+cd /var/www/html
+git clone <https://github.com/justmadethiscalculator/SharkLibrary.git>
+```
+
+## Option 2: Copy the files to your Pi using SCP
+Open a terminal/command prompt on your pc and use the following command:
 ```sh
 scp -r <path_to_file_on_pc>\* <user>@<raspberry_pi_ip_address>:/var/www/html/.
 ```
+Note: both the raspberry pi and your pc must be on the same network.
 
 For example:
 ```sh
 scp -r "C:\Users\me\Downloads\Library\*" root@192.168.141.122:/var/www/html/
 ```
 You may be prompted for the Raspberry Pi user's password: (usually "raspberry", "dietpi" or the password you set). 
-
-## 1. Update Your System
-
-Open a terminal and run:
-
-```sh
-sudo apt update
-sudo apt upgrade
-```
-
-## 2. Install PHP and Required Packages
-
-```sh
-sudo apt install php php-cli php-mbstring php-xml php-sqlite3
-```
-
-If you want to use MySQL/MariaDB:
-
-```sh
-sudo apt install mariadb-server php-mysql
-```
-
-## 3. Download or Copy SharkLibrary
-
-If you have not already, download or clone the SharkLibrary project to your Pi:
-
-```sh
-git clone <https://github.com/justmadethiscalculator/SharkLibrary.git>
-```
-
-Or copy the files to your Pi using SCP or a USB drive.
+-------------------------------------------------------------------------------------------------------------------------------
 
 ## 4. Set Up the Database
-
-If you want to use the sample database, import it:
-
+Return to the root directory and access MariaDB:
 ```sh
-sudo mariadb
+cd /.
+mariadb -u root
 ```
 
-Then in the MariaDB prompt:
+To create the database, in the MariaDB shell use:
+```sql
+CREATE DATABASE librarydb;
+```
 
+To import the database using the sql file:
+-------------------------------------------------------------------------------------------------------------------------------
+## Option 1: 
+In the MariaDB shell:
 ```sql
 CREATE DATABASE librarydb;
 USE librarydb;
 SOURCE /path/to/librarydb/database/librarydb.sql;
 ```
 
+## Option 2 (One-liner in Shell, outside MariaDB)
+Exit MariaDB using:
+```sql
+EXIT
+```
+
+Then in the terminal enter:
+```sql
+sudo mariadb -u root librarydb < /var/www/html/database/librarydb.sql
+```
+
+  if you get a "Can't open file" error, make sure the file path is correct and accessible by your user (usually root or mysql).
+  Try fixing it in the terminal with:
+  ```sh
+  sudo chmod 644 /var/www/html/database/librarydb.sql
+  ```
+  If using dietpi, check file permissions with:
+  ```sh
+  ls -l /var/www/html/database/
+  ```
+-------------------------------------------------------------------------------------------------------------------------------
+
+After importing the database, you need to create a dedicated Admin User in mariaDB to make it work:
+In the MariaDB shell:
+```sql
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'adminpass';
+GRANT ALL PRIVILEGES ON librarydb.* TO 'admin'@'localhost';
+FLUSH PRIVILEGES;
+```
+
 Update your PHP config if needed to point to your database.
 
-## 5. Start the PHP Built-in Server
+## 5. Open the Application
 
-Navigate to the `Library` directory:
-
+Ensure your files are in /var/www/html/ and set the correct permissions so Apache can read them:
 ```sh
-cd /path/to/SharkLibrary/Library
-php -S 0.0.0.0:8000
+sudo chmod -R 755 /var/www/html
+sudo chown -R www-data:www-data /var/www/html
 ```
 
-This will start a local web server accessible on your Pi’s IP at port 8000.
-
-## 6. Open the Application
-
-On your Pi or another device on the same network, open a browser and go to:
-
+On another device on the same network, open a browser and go to:
 ```
-http://<raspberry-pi-ip>:8000
+http://<raspberry-pi-ip>
 ```
 
 You should see the SharkLibrary home page.
 
 ## Troubleshooting
 
-- Check PHP is installed: `php -v`
 - If you see errors, check file permissions and ensure all files are present.
 - For database features, ensure MariaDB/MySQL is running and your PHP config is correct.
 
 ## Uninstallation
+To remove SharkLibrary:
+``` sh
+sudo rm -rf /var/www/html/*
+```
 
-To remove SharkLibrary, simply delete the project folder from your Pi.
-
----
+To remove installed packages (optional):
+``` sh
+sudo apt remove apache2 php mariadb-server -y
+```
+-------------------------------------------------------------------------------------------------------------------------------
 
 For more details, see the `UserGuide.md` and documentation in the `doc/` folder.
