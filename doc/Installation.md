@@ -36,6 +36,7 @@ sudo systemctl status mariadb
 ## 3. Download or Copy The Files to The Raspberry Pi
 
 If you have not already, download or clone the SharkLibrary project to your Pi:
+
 -------------------------------------------------------------------------------------------------------------------------------
 ## Option 1: Clone from GitHub
 In the raspberry pi's terminal: 
@@ -56,6 +57,7 @@ For example:
 scp -r "C:\Users\me\Downloads\Library\*" root@192.168.141.122:/var/www/html/
 ```
 You may be prompted for the Raspberry Pi user's password: (usually "raspberry", "dietpi" or the password you set). 
+
 -------------------------------------------------------------------------------------------------------------------------------
 
 ## 4. Set Up the Database
@@ -71,11 +73,11 @@ CREATE DATABASE librarydb;
 ```
 
 To import the database using the sql file:
+
 -------------------------------------------------------------------------------------------------------------------------------
 ## Option 1: 
 In the MariaDB shell:
 ```sql
-CREATE DATABASE librarydb;
 USE librarydb;
 SOURCE /path/to/librarydb/database/librarydb.sql;
 ```
@@ -100,6 +102,8 @@ sudo mariadb -u root librarydb < /var/www/html/database/librarydb.sql
   ```sh
   ls -l /var/www/html/database/
   ```
+  Then try to import the sql file again.
+  
 -------------------------------------------------------------------------------------------------------------------------------
 
 After importing the database, you need to create a dedicated Admin User in mariaDB to make it work:
