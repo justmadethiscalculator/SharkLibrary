@@ -51,11 +51,6 @@ For convenience, move all the files and folders
 sudo mv /var/www/html/SharkLibrary/Library/* /var/www/html/
 ```
 
-Optional: Clean up the old folder:
-```sh
-sudo rm -r /var/www/html/SharkLibrary
-```
-
 ## Option 2: Copy the files to your Pi using SCP
 Open a terminal/command prompt on your pc and use the following command:
 ```sh
