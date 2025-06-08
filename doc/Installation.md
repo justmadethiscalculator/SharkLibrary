@@ -46,6 +46,16 @@ cd /var/www/html
 git clone <https://github.com/justmadethiscalculator/SharkLibrary.git>
 ```
 
+For convinience, move all the files and folders
+```sh
+sudo mv /var/www/html/SharkLibrary/Library/* /var/www/html/
+```
+
+Optional: Clean up the old folder:
+```sh
+sudo rm -r /var/www/html/SharkLibrary
+```
+
 ## Option 2: Copy the files to your Pi using SCP
 Open a terminal/command prompt on your pc and use the following command:
 ```sh
@@ -125,16 +135,10 @@ sudo chmod -R 755 /var/www/html
 sudo chown -R www-data:www-data /var/www/html
 ```
 
-Depending on which method you used in **Step 3**, on another device on the same network, open a browser and go to:
-  A. If you used git (Option 1):
-  ```
-  http://<raspberry-pi-ip>/SharkLibrary/Library/
-  ```
-
-  B. If you used scp (Option 2):
-  ```
-  http://<raspberry-pi-ip>
-  ```
+On another device on the same network, open a browser and go to:
+```
+http://<raspberry-pi-ip>
+```
 
 You should see the SharkLibrary home page.
 
