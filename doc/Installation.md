@@ -43,7 +43,7 @@ If you have not already, download or clone the SharkLibrary project to your Pi:
 In the raspberry pi's terminal: 
 ```sh
 cd /var/www/html
-git clone <https://github.com/justmadethiscalculator/SharkLibrary.git>
+git clone https://github.com/justmadethiscalculator/SharkLibrary.git
 ```
 
 For convenience, move all the files and folders
@@ -99,16 +99,18 @@ Then in the terminal enter:
 sudo mariadb -u root librarydb < /var/www/html/database/librarydb.sql
 ```
 
-  if you get a "Can't open file" error, make sure the file path is correct and accessible by your user (usually root or mysql).
-  Try fixing it in the terminal with:
-  ```sh
-  sudo chmod 644 /var/www/html/database/librarydb.sql
-  ```
-  If using dietpi, check file permissions with:
-  ```sh
-  ls -l /var/www/html/database/
-  ```
-  Then try to import the sql file again.
+-------------------------------------------------------------------------------------------------------------------------------
+
+if you get a "Can't open file" error, make sure the file path is correct and accessible by your user (usually root or mysql).
+Try fixing it in the terminal with:
+```sh
+sudo chmod 644 /var/www/html/database/librarydb.sql
+```
+If using dietpi, check file permissions with:
+```sh
+ls -l /var/www/html/database/
+```
+Then try to import the sql file again.
   
 -------------------------------------------------------------------------------------------------------------------------------
 
