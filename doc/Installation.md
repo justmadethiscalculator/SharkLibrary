@@ -1,7 +1,7 @@
 # SharkLibrary Installation Guide (Raspberry Pi Zero 2)
 
 Follow these steps to install and run SharkLibrary on your Raspberry Pi Zero 2.
-Note: This guide assumes that the user has logged in using the 'root' user, please adjust accordingly
+Note: This guide assumes that the user has logged in using the 'root' user, please adjust accordingly.
 
 ## Prerequisites
 
