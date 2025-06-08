@@ -24,6 +24,7 @@ sudo apt upgrade
 sudo apt install apache2 -y
 sudo apt install php php-mysql
 sudo apt install mariadb-server -y
+sudo apt install git -y //Optional: If you want to copy files through github
 ```
 
 Verify installation:
@@ -38,7 +39,7 @@ sudo systemctl status mariadb
 If you have not already, download or clone the SharkLibrary project to your Pi:
 
 -------------------------------------------------------------------------------------------------------------------------------
-## Option 1: Clone from GitHub
+## Option 1: Clone from GitHub (git needs to be installed)
 In the raspberry pi's terminal: 
 ```sh
 cd /var/www/html
@@ -124,10 +125,16 @@ sudo chmod -R 755 /var/www/html
 sudo chown -R www-data:www-data /var/www/html
 ```
 
-On another device on the same network, open a browser and go to:
-```
-http://<raspberry-pi-ip>
-```
+Depending on which method you used in **Step 3**, on another device on the same network, open a browser and go to:
+  A. If you used git (Option 1):
+  ```
+  http://<raspberry-pi-ip>/SharkLibrary/Library/
+  ```
+
+  B. If you used scp (Option 2):
+  ```
+  http://<raspberry-pi-ip>
+  ```
 
 You should see the SharkLibrary home page.
 
