@@ -38,13 +38,16 @@ Welcome to SharkLibrary! This guide will help you navigate and use the digital l
 3. Click and type in the comment box to make a comment, then press the "submit" button to make the comment show up on the website
 
 ## 5. Downloads Page
+
 - On the home page, click the "Downloads" button to visit the **About Us** page.
 
-**Searching Books**
+**Searching For a Book**
+- Click and type in the search bar to find the name of the book, then press the "search" button.
+- You may also filter and sort the books using the provided options, then press the "search" button.
+
 **Downloading Books**
-1. Click the **Download** button next to a book you want to download.
-2. You will be redirected to the download page (`download.php`).
-3. Follow the instructions to download the PDF file to your device.
+- Click the "Download" button on the same row as your book.
+- A PDF file will be downloaded.
 
 ## Navigation Tips
 
