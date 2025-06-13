@@ -13,35 +13,43 @@ Welcome to SharkLibrary! This guide will help you navigate and use the digital l
      ```
      http://192.168.141.123/
      ```
-2. **Home Page**
-   - The home page displays the library logo and navigation buttons.
-   - Use the buttons to access different sections: About Us, Previews, and Downloads.
+     
+## 2. Home Page
 
-3. ## About Us Page
+- The home page displays the library logo and navigation buttons.
+- Use the buttons to access different sections: About Us, Previews, and Downloads.
 
-- Visit the **About Us** page to view and learn more about the SharkLibrary project, its goals, and contributors.
+## 3. About Us Page
 
-## B. Previews Page
-## Browsing Books
+- On the home page, click the "About Us" button to visit the **About Us** page.
+- Visit this page to view and learn more about the SharkLibrary project, its goals, and contributors.
 
+## 4. Previews Page
+
+- On the home page, click the "Previews" button to visit the **About Us** page.
+  
+**Browsing Books**
 - The main section lists available shark-related books with their covers and titles.
 - Scroll through the collection to find a book of interest.
 
-## Previewing Books
+**Previewing Books**
+1. Click the cover of a book to view a summary and the comments.
+2. The page will display additional information or a sample of the selected book.
+3. Click and type in the comment box to make a comment, then press the "submit" button to make the comment show up on the website
 
-1. Click the **Preview** button next to a book to view a sample or summary.
-2. The preview page (`preview.html`) will display additional information or a sample of the selected book.
+## 5. Downloads Page
+- On the home page, click the "Downloads" button to visit the **About Us** page.
 
-## Downloading Books
-
+**Searching Books**
+**Downloading Books**
 1. Click the **Download** button next to a book you want to download.
 2. You will be redirected to the download page (`download.php`).
 3. Follow the instructions to download the PDF file to your device.
 
 ## Navigation Tips
 
-- Use the navigation bar or buttons at the top of each page to move between Home, About, Preview, and Download sections.
-- Book covers and titles are clickable for easy access to previews and downloads.
+- Use the buttons at the top of the About Us, Previews, and Downloads page to move between pages quickly.
+- Most Interactive buttons will either be obvious, enlarge when you hover over them, or be highlighted when you hover over them.
 
 ## Support
 
