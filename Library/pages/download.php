@@ -72,7 +72,7 @@ function downloadBook($bookID, $conn) {
         <div class="button-row">
             <button onclick="location.href='../index.php'">Back to Home</button>
             <button onclick="location.href='about.html'">About Us</button>
-            <button onclick="location.href='previews.php'">Previews</button>
+            <button onclick="location.href='preview.php'">Previews</button>
             <button onclick="location.href='download.php'">Downloads</button>
         </div>
     </section>
