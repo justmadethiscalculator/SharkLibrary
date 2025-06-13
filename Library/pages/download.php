@@ -63,7 +63,7 @@ function downloadBook($bookID, $conn) {
     <link rel="stylesheet" href="../css/download.css">
 </head>
 <body>
-<header>
+<header style="height: 20vh">
     <img src="../images/library_logo_header.png" alt="shark with TKU written on its belly" class="hleft"> 
 </header>
 
