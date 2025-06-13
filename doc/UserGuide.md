@@ -5,12 +5,23 @@ Welcome to SharkLibrary! This guide will help you navigate and use the digital l
 ## Getting Started
 
 1. **Open the Application**
-   - Launch SharkLibrary in your web browser by opening the `index.php` file or accessing the hosted URL.
-
+   - Launch SharkLibrary in your web browser by accessing the hosted URL, which should look like this:
+     ```
+     http://<raspberry-pi-ip>
+     ```
+     For example:
+     ```
+     http://192.168.141.123/
+     ```
 2. **Home Page**
    - The home page displays the library logo and navigation buttons.
-   - Use the navigation bar or buttons to access different sections: Home, About, Preview, and Download.
+   - Use the buttons to access different sections: About Us, Previews, and Downloads.
 
+3. ## About Us Page
+
+- Visit the **About Us** page to view and learn more about the SharkLibrary project, its goals, and contributors.
+
+## B. Previews Page
 ## Browsing Books
 
 - The main section lists available shark-related books with their covers and titles.
@@ -26,10 +37,6 @@ Welcome to SharkLibrary! This guide will help you navigate and use the digital l
 1. Click the **Download** button next to a book you want to download.
 2. You will be redirected to the download page (`download.php`).
 3. Follow the instructions to download the PDF file to your device.
-
-## About Page
-
-- Visit the **About** page to learn more about the SharkLibrary project, its goals, and contributors.
 
 ## Navigation Tips
 
