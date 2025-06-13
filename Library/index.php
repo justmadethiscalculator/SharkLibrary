@@ -27,11 +27,10 @@ $conn->close();
 ?>
 
 <!DOCTYPE html>
-
-<html lang="en">
+<meta charset="UTF-8">
 <head>
 	<title>Welcome to Shark's Library</title>
-	<link rel="stylesheet" href="css/style.css"> <!--Links to the external style.css file -->
+	<link rel="stylesheet" href="css/style.css?v=50"> <!--Links to the external style.css file -->
 </head>
 
 <style>
@@ -41,11 +40,18 @@ $conn->close();
 </style>
 
 <body>
-<header style="height: 120px"> <!--Example of inline CSS-->
+<header style="height: 20vh"> <!--Example of inline CSS-->
 	<img id="switchImage" src="images/home_header1.png" alt="Welcome to Shark's Library" class="home-header">
 </header>
 
 <main>
+		<div class="scroll-left">
+			<div class="bolded">
+				<p>
+				WELCOME TO SHARK'S LIBRARY | <?php echo $visit_count; ?> VISITS | <?php echo $download_count; ?> DOWNLOADS
+				</p>
+		  </div>
+		</div>
 	<section id="about"> <!--Helps divide the page into sections-->
 		<div class="container"> <!--Defines what is in the section, check the style.css file-->
 			<img src="images/library_logo.png" alt="shark with TKU written on its belly" class="home-logo fade-in" id="image1"><!--Logo is in the image folder-->
@@ -54,10 +60,6 @@ $conn->close();
 			</a>
 			<img src="images/home_shark.png" alt="Shark that's waving its arms" class="home-shark fade-in longer" id="image4">
 		</div>
-	</section>
-	<section id="counter">
-		<div class="container">
-			<p style="text-align:center;"> <?php echo $visit_count; ?> VISITS | <?php echo $download_count; ?> DOWNLOADS</p>
 	</section>
 	<section id="preview">
 		<div class="container">
@@ -83,8 +85,8 @@ $conn->close();
 			</a>
 			<div class="textwrapper-home text-right">
 				<div class="bolded">
-					<p style="padding-right: 50px">Grab a copy! The downloads section includes:</p>
-					<ul style="padding-right: 320px;">
+					<p style="padding-right: 4%">Grab a copy! The downloads section includes:</p>
+					<ul style="padding-right: 25%;">
 						<li>Book search function</li>
 						<li>Information on books</li>
 					</ul>
@@ -92,6 +94,11 @@ $conn->close();
 			</div>
 		</div>
 	</section>
+		<div class="scroll-left">
+			<div class="bolded">
+				<p> WELCOME TO SHARK'S LIBRARY | <?php echo $visit_count; ?> VISITS | <?php echo $download_count; ?> DOWNLOADS</p>
+			</div>
+		 </div>
 </main>
 
 <footer>
