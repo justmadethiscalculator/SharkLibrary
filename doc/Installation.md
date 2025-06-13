@@ -52,9 +52,10 @@ sudo mv /var/www/html/SharkLibrary/Library/* /var/www/html/
 ```
 
 ## Option 2: Copy the files to your Pi using SCP
+Download the files from github onto your PC
 Open a terminal/command prompt on your pc and use the following command:
 ```sh
-scp -r <path_to_file_on_pc>\* <user>@<raspberry_pi_ip_address>:/var/www/html/.
+scp -r <path_to_index_file_on_pc>\* <user>@<raspberry_pi_ip_address>:/var/www/html/.
 ```
 Note: both the raspberry pi and your pc must be on the same network.
 
@@ -110,7 +111,7 @@ If using dietpi, check file permissions with:
 ```sh
 ls -l /var/www/html/database/
 ```
-Then try to import the sql file again.
+Then try to import the sql file again (Option 1 or 2).
   
 -------------------------------------------------------------------------------------------------------------------------------
 
