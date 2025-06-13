@@ -34,7 +34,7 @@ Welcome to SharkLibrary! This guide will help you navigate and use the digital l
 
 **Previewing Books**
 1. Click the cover of a book to view a summary and the comments.
-2. The page will display additional information or a sample of the selected book.
+2. The page will display additional information selected book when you scroll down.
 3. Click and type in the comment box to make a comment, then press the "submit" button to make the comment show up on the website
 
 ## 5. Downloads Page
