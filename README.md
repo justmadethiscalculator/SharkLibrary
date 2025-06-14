@@ -4,7 +4,7 @@ Welcome to Shark's Library — a parody of a modern, web-based digital library d
 
 ## What is Shark's Library?
 
-Shark's Library is an open-source project for a web application with a relational database that lets users preview and download books about sharks and ocean science. It is primarily designed for students to showcase the basics of web development and basic PHP, HTML, and SQL implementation while also serving as a functional e-library.
+Shark's Library is an open-source project for a web application with a relational database that lets users preview and download books about sharks and ocean science. This project was created as a semester-long assignment for an OPEN SOURCE PRACTICE course. It is primarily designed for students to showcase the basics of web development and basic PHP, HTML, and SQL implementation while also serving as a functional e-library.
 
 ## Key Features
 
