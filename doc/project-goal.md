@@ -1,4 +1,4 @@
-# SHARK’S LIBRARY
+# Shark’s Library
 
 ## High-Level Functionalities
 
