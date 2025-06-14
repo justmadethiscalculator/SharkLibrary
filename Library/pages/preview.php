@@ -50,6 +50,8 @@ if ($bookID) {
     </section>
 
     <section id="book-previews">
+        <img src="../images/seaweed.png" alt="seaweed" class="seaweed">
+		<img src="../images/seaweed.png" alt="seaweed" class="seaweed flip">
         <h1 class="text title">Previews</h1>
         <p class="text">Explore the massive collection of books here at Shark's Library! (Still expanding)</p>
 
