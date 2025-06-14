@@ -47,7 +47,7 @@ All data is pulled dynamically from a database.
 | `/index.php`     | GET          | None                 | time              | Fetch time, read/update visit & download counts     |
 | `/about.html`    | None         | None                 | None              | Static page                                         |
 | `/previews.php`  | GET, POST    | comment, bookID      | None              | Fetch preview data, insert comment                 |
-| `/downloads.php` | GET, POST    | search, id/filename  | None              | Fetch book list, serve PDF, update download count  |
+| `/downloads.php` | GET          | search, id/filename  | None              | Fetch book list, serve PDF, update download count  |
 
 ---
 
