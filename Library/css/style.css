@@ -409,6 +409,19 @@ div.content.member {
     border-bottom:none
 }
 
+.seaweed {
+    position: absolute;
+	bottom: -90%;
+	left: 11%;
+	transform: translateX(-50%);
+	width: 25%;
+	pointer-events: none;
+}
+
+.flip {
+	left: 75%;
+	transform: scaleX(-1);
+}
 
 /* ====== DOWNLOAD SECTION ====== */
 #download-section {
