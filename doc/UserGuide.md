@@ -1,4 +1,4 @@
-# SharkLibrary User Guide
+# Shark's Library User Guide
 
 Welcome to SharkLibrary! This guide will help you navigate and use the digital library application.
 
