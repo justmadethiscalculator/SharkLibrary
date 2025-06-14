@@ -27,7 +27,7 @@ The following software packages must be installed and properly configured:
 
 ### 2. PHP
 - Version: PHP 7.4 or higher  
-- Modules: `php-mysqli`, `php-gd`  
+- Modules: `php`, `php-mysql`  
 
 ### 3. Database
 - MariaDB 10.x (MySQL-compatible relational database)
