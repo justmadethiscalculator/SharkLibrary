@@ -6,7 +6,6 @@ The final demo will demonstrate a functional library catalog.
 
 ### Presented Features:
 - **Homepage:**  
-  - Displays current time  
   - Visit count  
   - Book download count  
 
@@ -31,10 +30,10 @@ The final demo will demonstrate a functional library catalog.
   - Click to download PDF  
 
 ### Functional Pages:
-- `index.php` – Time + counter retrieval  
+- `index.php` – Counter retrieval  
 - `about.html` – Static HTML page  
 - `previews.php` – Loads and displays book previews  
-- `downloads.php` – Displays downloadable books with search
+- `downloads.php` – Displays downloadable books with a search
 
 All data is pulled dynamically from a database.
 
@@ -44,10 +43,10 @@ All data is pulled dynamically from a database.
 
 | URL Path        | HTTP Method | HTTP Variables      | Session Variables | Database/Table Operations                           |
 |------------------|--------------|----------------------|-------------------|-----------------------------------------------------|
-| `/index.php`     | GET          | None                 | time              | Fetch time, read/update visit & download counts     |
+| `/index.php`     | GET          | None                 | None              | Fetch time, read/update visit & download counts     |
 | `/about.html`    | None         | None                 | None              | Static page                                         |
-| `/previews.php`  | GET, POST    | comment, bookID      | None              | Fetch preview data, insert comment                 |
-| `/downloads.php` | GET          | search, id/filename  | None              | Fetch book list, serve PDF, update download count  |
+| `/previews.php`  | GET, POST    | commentID, bookID      | None              | Fetch preview data, insert comment                 |
+| `/downloads.php` | GET          | search, category, download  | None              | Fetch book list, serve PDF, update download count  |
 
 ---
 
