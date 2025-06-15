@@ -41,6 +41,16 @@ FLUSH PRIVILEGES;
 SHOW DATABASES;
 ```
 
+To connect the application to the database, edit the config.php file located in the project root (`/var/www/html/`).
+Make sure the values match your actual database setup.
+For example:
+```php
+$host = "localhost";  
+$username = "admin";       // your database username
+$password = "adminpass";   // your database password
+$database = "librarydb";   // your database name
+```
+
 ### Fix File Permission Errors (if any):
 ```bash
 sudo chmod 644 /var/www/html/database/librarydb.sql
