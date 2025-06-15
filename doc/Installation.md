@@ -127,6 +127,11 @@ Update your PHP config if needed to point to your database.
 
 ## 5. Open the Application
 
+Exit MariaDB using:
+```sql
+EXIT
+```
+
 Ensure your files are in /var/www/html/ and set the correct permissions so Apache can read them:
 ```sh
 sudo chmod -R 755 /var/www/html
