@@ -1,11 +1,5 @@
 <?php
-$host = "localhost";
-$username = "admin";        // Change if necessary
-$password = "adminpass";            // Change if your MariaDB has a password
-$database = "librarydb";
-
-$conn = new mysqli($host, $username, $password, $database);
-if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
+include('../config.php');
 
 $books = $conn->query("SELECT * FROM book");
 
