@@ -113,7 +113,7 @@ Always verify after updates:
 
 ---
 
-## 🔍 Summary Table
+## Summary Table
 
 | Task                    | Command or Location                        |
 |-------------------------|--------------------------------------------|
