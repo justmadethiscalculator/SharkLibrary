@@ -17,33 +17,50 @@ Make sure to log in as a root user for convenience.
 ### Database Configuration
 
 Log into MariaDB using:
-
 ```bash
 sudo mariadb -u root
 ```
 
-Run the following SQL commands:
-
+Here are a few commands that may help with your configuration"
+1. To create a new database:
 ```sql
-CREATE DATABASE librarydb;
-CREATE USER 'user_name'@'localhost' IDENTIFIED BY 'user_password';
-GRANT ALL PRIVILEGES ON librarydb.* TO 'admin'@'localhost';
-FLUSH PRIVILEGES;
-EXIT;
+CREATE DATABASE database_name;
 ```
 
-Import the database schema:
+2. To view all databases on the server:
+```sql
+SHOW DATABASES;
+```
 
-```bash
-sudo mysql -u admin -p librarydb < /var/www/html/sharklibrary/database/librarydb.sql
+3. To create a new user:
+```sql
+USE database_name;
+CREATE USER 'user_name'@'localhost' IDENTIFIED BY 'user_password';
+GRANT ALL PRIVILEGES ON database_name.* TO 'user_name'@'localhost';
+FLUSH PRIVILEGES;
 ```
 
 ### Verify Permissions
-Ensure correct file permissions:
 
-```bash
-sudo chown -R www-data:www-data /var/www/html/sharklibrary
-sudo chmod -R 755 /var/www/html/sharklibrary
+Ensure correct file permissions:
+**Database**
+if you get a "Can't open file" error, make sure the file path is correct and accessible by your user (usually root).
+Try fixing it in the terminal with:
+```sh
+sudo chmod 644 /var/www/html/database/librarydb.sql
+```
+
+If using dietpi, check file permissions with:
+```sh
+ls -l /var/www/html/database/
+```
+
+**Backend**
+
+Ensure your files are in /var/www/html/ and set the correct permissions so Apache can read them:
+```sh
+sudo chmod -R 755 /var/www/html
+sudo chown -R www-data:www-data /var/www/html
 ```
 
 ---
