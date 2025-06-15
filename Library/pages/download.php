@@ -1,14 +1,5 @@
 <?php
-$host = "localhost";
-$username = "admin";        // Change if necessary
-$password = "adminpass";            // Change if your MariaDB has a password
-$database = "librarydb";
-
-// Connect to the database
-$conn = new mysqli($host, $username, $password, $database);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include('../config.php');
 
 // Handle search
 $search = isset($_GET['search']) ? $_GET['search'] : '';
