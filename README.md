@@ -17,9 +17,9 @@ Shark's Library is an open-source project for a web application with a relationa
 ### Requirements
 
 - PHP 7.4+
-- MySQL 5.7+
+- MariaDB (MySQL-compatible)
 - Apache or Nginx web server
-- (Recommended) Raspberry Pi Zero 2 W for deployment
+- Raspberry Pi Zero 2 W for deployment
 
 ## Book Collection
 
