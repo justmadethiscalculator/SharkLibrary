@@ -1,25 +1,15 @@
-# Administrator's Guide - Shark's Library
+# Administrator's Guide - Shark's Library 🦈
 
-This guide provides detailed information for system administrators on how to configure, maintain, and troubleshoot the Shark's Library system.
+This guide provides detailed information for system administrators on how to **configure**, **maintain**, and **troubleshoot** the Shark's Library system.
 
-## System Configuration
+---
 
-### Hardware Requirements
-
-- **Recommended Platform:** Raspberry Pi Zero 2 W
-- **Processor:** ARM Cortex-A53, Quad-core 64-bit SoC
-- **Storage:** Minimum 8 GB microSD card (16 GB+ recommended)
-- **Network:** 2.4GHz 802.11 b/g/n wireless LAN
-
-### Operating System Setup
-
-1. Install DietPi (latest stable release)
-2. Configure headless setup for optimal performance
-3. Enable SSH for remote administration
+## ⚙️ System Configuration
 
 ### Web Server Configuration
 
-#### Apache Setup
+Ensure Apache is configured with a virtual host for SharkLibrary:
+
 ```apache
 <VirtualHost *:80>
     ServerName library.local
@@ -33,9 +23,17 @@ This guide provides detailed information for system administrators on how to con
 </VirtualHost>
 ```
 
+Enable and restart Apache:
+
+```bash
+sudo a2ensite library.conf
+sudo systemctl reload apache2
+```
+
 ### Database Configuration
 
-1. Create a new MySQL database:
+Create the database and user:
+
 ```sql
 CREATE DATABASE librarydb;
 CREATE USER 'library_user'@'localhost' IDENTIFIED BY 'your_secure_password';
@@ -43,116 +41,116 @@ GRANT ALL PRIVILEGES ON librarydb.* TO 'library_user'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-2. Import the database schema:
+Import the initial schema:
+
 ```bash
-mysql -u library_user -p librarydb < database/librarydb.sql
+mysql -u library_user -p librarydb < /var/www/html/Library/database/librarydb.sql
 ```
 
-## Application Maintenance
+---
 
-### Regular Maintenance Tasks
+## 🛠 Application Maintenance
 
-1. **Database Backup (Weekly)**
-   ```bash
-   mysqldump -u library_user -p librarydb > backup/librarydb_$(date +%Y%m%d).sql
-   ```
+### 🔁 Regular Maintenance Tasks
 
-2. **Log Rotation (Monthly)**
-   - Configure logrotate for Apache logs
-   - Archive old logs in `/var/log/apache2/`
+**Database Backup (Weekly):**
+```bash
+mysqldump -u library_user -p librarydb > backup/librarydb_$(date +%Y%m%d).sql
+```
 
-3. **Storage Management**
-   - Monitor PDF storage usage
-   - Clean up temporary files
-   ```bash
-   find /var/www/html/Library/temp/* -mtime +7 -type f -delete
-   ```
+**Log Rotation (Monthly):**
+- Configure logrotate for Apache logs.
+- Archive old logs in `/var/log/apache2/`.
 
-### Security Maintenance
+**Storage Management:**
+- Monitor PDF storage usage.
+- Clean temporary files older than 7 days:
+```bash
+find /var/www/html/Library/temp/* -mtime +7 -type f -delete
+```
 
-1. **File Permissions**
-   ```bash
-   chown -R www-data:www-data /var/www/html/Library
-   find /var/www/html/Library -type f -exec chmod 644 {} \;
-   find /var/www/html/Library -type d -exec chmod 755 {} \;
-   ```
+### 🔐 Security Maintenance
 
-2. **SSL Certificate Renewal**
-   - Monitor SSL certificate expiration
-   - Set up auto-renewal if using Let's Encrypt
+**File Permissions:**
+```bash
+chown -R www-data:www-data /var/www/html/Library
+find /var/www/html/Library -type f -exec chmod 644 {} \;
+find /var/www/html/Library -type d -exec chmod 755 {} \;
+```
 
-### Performance Optimization
+**SSL Certificate Renewal:**
+- Monitor certificate expiration.
+- Use Certbot for Let's Encrypt auto-renewals.
 
-1. **PHP Configuration**
-   - Adjust `memory_limit` in php.ini
-   - Enable OpCache for better performance
-   - Configure session handling
+### 🚀 Performance Optimization
 
-2. **MySQL Optimization**
-   - Regular query optimization
-   - Index maintenance
-   - Monitor slow queries
+**PHP Configuration:**
+- Increase `memory_limit` in `php.ini`.
+- Enable OpCache.
+- Optimize session settings.
 
-## Troubleshooting
+**MySQL Optimization:**
+- Optimize queries and indexes.
+- Monitor and resolve slow queries.
+
+---
+
+## 🧰 Troubleshooting
 
 ### Common Issues
 
-1. **Database Connection Issues**
-   - Check MySQL service status
-   - Verify database credentials
-   - Check network connectivity
+**Database Connection Issues:**
+- Check MySQL service:
+  ```bash
+  sudo systemctl status mariadb
+  ```
+- Verify database credentials.
+- Check network and socket connectivity.
 
-2. **File Permission Issues**
-   - Verify web server user permissions
-   - Check directory ownership
-   - Validate file access rights
+**File Permission Issues:**
+- Confirm ownership and access rights.
 
-3. **Performance Issues**
-   - Monitor system resources
-   - Check Apache/PHP logs
-   - Analyze MySQL slow query log
+**Performance Issues:**
+- Monitor resources using `htop`, `iotop`, or `vmstat`.
+- Analyze Apache, PHP, and MySQL logs.
 
-### Monitoring
+---
 
-1. **System Monitoring**
-   - CPU usage
-   - Memory utilization
-   - Disk space
-   - Network traffic
+## 📊 Monitoring
 
-2. **Application Monitoring**
-   - Apache status
-   - PHP-FPM status (if used)
-   - MySQL server status
+### System Monitoring
+- CPU, Memory, Disk, Network
 
-## Backup and Recovery
+### Application Monitoring
+- Apache and MySQL status
+- PHP-FPM (if used)
+
+---
+
+## 🔄 Backup and Recovery
 
 ### Backup Strategy
 
-1. **Daily Backups**
-   - Database dumps
-   - Configuration files
-   - User-uploaded content
+**Daily:**
+- Database, config files, user uploads
 
-2. **Backup Retention**
-   - Keep daily backups for 1 week
-   - Keep weekly backups for 1 month
-   - Keep monthly backups for 1 year
+**Retention:**
+- Daily for 7 days
+- Weekly for 1 month
+- Monthly for 1 year
 
 ### Recovery Procedures
 
-1. **Database Recovery**
-   ```bash
-   mysql -u library_user -p librarydb < backup/librarydb_backup.sql
-   ```
+**Database Recovery:**
+```bash
+mysql -u library_user -p librarydb < backup/librarydb_backup.sql
+```
 
-2. **File System Recovery**
-   - Restore from backup archives
-   - Verify file permissions
-   - Check system integrity
+**File System Recovery:**
+- Restore from backup
+- Set correct permissions
+- Validate functionality
 
-## Contact Support
+---
 
-For technical support or questions about this guide, please contact:
-- System Administrator: [admin@sharklibrary.local]
-- Technical Support: [support@sharklibrary.local]
+## 📬 Contact Support
