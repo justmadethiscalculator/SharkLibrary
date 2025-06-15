@@ -26,7 +26,7 @@ Welcome to SharkLibrary! This guide will help you navigate and use the digital l
 
 ## 4. Previews Page
 
-- On the home page, click the "Previews" button to visit the **About Us** page.
+- On the home page, click the "Previews" button to visit the **Previews** page.
   
 **Browsing Books**
 - The main section lists available shark-related books with their covers and titles.
@@ -39,7 +39,7 @@ Welcome to SharkLibrary! This guide will help you navigate and use the digital l
 
 ## 5. Downloads Page
 
-- On the home page, click the "Downloads" button to visit the **About Us** page.
+- On the home page, click the "Downloads" button to visit the **Downloads** page.
 
 **Searching For a Book**
 - Click and type in the search bar to find the name of the book, then press the "search" button.
