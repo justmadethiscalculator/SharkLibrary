@@ -14,6 +14,8 @@ Ensure your Raspberry Pi has the following installed:
 
 Make sure to log in as a root user for convenience.
 
+---
+
 ### Database Configuration
 
 Log into MariaDB using:
@@ -39,6 +41,8 @@ CREATE USER 'user_name'@'localhost' IDENTIFIED BY 'user_password';
 GRANT ALL PRIVILEGES ON database_name.* TO 'user_name'@'localhost';
 FLUSH PRIVILEGES;
 ```
+
+---
 
 ### Verify Permissions
 
