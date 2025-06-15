@@ -69,11 +69,12 @@ sudo chown -R www-data:www-data /var/www/html
 
 ### 1. Backup the Database
 
-Regularly back up the database:
-
+To back up the database:
 ```bash
-mysqldump -u admin -p librarydb > backup_librarydb.sql
+cd /var/www/html/database
+mysqldump -u root -p librarydb > backup_librarydb.sql
 ```
+Then enter your password when prompted.
 
 ### 2. Check Logs and Metrics
 
@@ -89,9 +90,9 @@ Track visit and download statistics via the database table `librarydb`.
 
 To add or update books:
 
-- Add new PDFs to `/var/www/html/sharklibrary/books/`
+- Add new PDFs to `/var/www/html/books/`
 - Add corresponding cover images to `/images/covers/`
-- Update any necessary details in the database manually or via PHP scripts
+- Update any necessary details in the database manually though MariaDB or via PHP scripts
 
 ### 4. Secure the Application
 
@@ -114,12 +115,12 @@ After changes or updates, always verify that:
 
 | Task | Command or Location |
 |------|----------------------|
-| Apache Root | `/var/www/html/sharklibrary/` |
+| Apache Root Directory| `/var/www/html/` |
 | Database Import | `librarydb.sql` |
 | Logs | `/var/log/apache2/error.log` |
-| Book Files | `books/` and `images/covers/` |
+| Book Files | `/books/` and `/images/covers/` |
 | Access Site | `http://raspberrypiIP` |
 
 ---
 
-For further help, contact the system administrator or your development team.
+For further help, contact the project maintainers.
