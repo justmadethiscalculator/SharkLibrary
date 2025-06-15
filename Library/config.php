@@ -1,16 +1,15 @@
 <?php
 // Database Configuration for SharkLibrary
-$host = "127.0.0.1";
-$port = 4307;
-$username = "admin";
-$password = "adminpass";
+$host = "localhost";
+$username = "admin";        // Change if necessary
+$password = "adminpass";    // Change if according to the password assigned in MariaDB
 $database = "librarydb";
 
-// Create connection
-$conn = mysqli_connect($host, $username, $password, $database, $port);
+// Connect to the database
+$conn = new mysqli($host, $username, $password, $database);
 
 // Check connection
-if (!$conn) {
-    die("Database connection failed: " . mysqli_connect_error());
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 ?>
