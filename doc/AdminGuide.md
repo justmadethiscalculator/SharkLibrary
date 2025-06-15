@@ -28,13 +28,13 @@ sudo mariadb -u root
 ### Useful SQL Commands:
 ```sql
 -- Create a new database
-CREATE DATABASE librarydb;
+CREATE DATABASE new_librarydb;
 
 -- Create a new user
 CREATE USER 'library_user'@'localhost' IDENTIFIED BY 'your_secure_password';
 
 -- Grant privileges
-GRANT ALL PRIVILEGES ON librarydb.* TO 'library_user'@'localhost';
+GRANT ALL PRIVILEGES ON new_librarydb.* TO 'library_user'@'localhost';
 FLUSH PRIVILEGES;
 
 -- View all databases
