@@ -117,18 +117,18 @@ sudo tail -f /var/log/apache2/error.log
 
 Always verify after updates:
 - All web pages load correctly
-- PDF downloads function
-- Comment system works
+- PDF downloads are functional
+- The comment system works
 - Visit/download counters increment
 
 ---
 
 ## Summary Table
 
-| Task                    | Command or Location                        |
+| Task                    | Location                                   |
 |-------------------------|--------------------------------------------|
 | Apache Root Directory   | `/var/www/html/`                           |
-| Database Import         | `librarydb.sql`                            |
+| Database Import         | `/database/librarydb.sql`                  |
 | Logs                    | `/var/log/apache2/error.log`               |
 | Book Files              | `/books/`, `/images/covers/`               |
 | Access Site             | `http://raspberrypiIP`                     |
