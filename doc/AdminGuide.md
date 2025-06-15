@@ -1,68 +1,63 @@
 # Administrator's Guide - Shark's Library
 
-This guide provides detailed information for system administrators on how to **configure**, **maintain**, and **troubleshoot** the Shark's Library system.
+This guide provides system administrators with detailed steps to **configure**, **maintain**, and **secure** the SharkLibrary web application running on a Raspberry Pi.
 
 ---
-### Prerequisites
 
-Ensure your Raspberry Pi has the following installed:
+## Prerequisites
+
+Ensure the following software is installed on your Raspberry Pi:
+
 - Raspberry Pi OS (Lite or Desktop)
 - Apache2 Web Server
-- PHP (7.4 or later)
+- PHP 7.4 or later
 - MariaDB (MySQL-compatible)
 - SSH access or local terminal
 
-Make sure to log in as a root user for convenience.
+> It’s recommended to perform administration tasks as the `root` user or use `sudo`.
 
 ---
 
-### Database Configuration
+## Database Configuration
 
-Log into MariaDB using:
+### Log in to MariaDB:
 ```bash
 sudo mariadb -u root
 ```
 
-Here are a few commands that may help with your configuration"
-1. To create a new database:
+### Useful SQL Commands:
 ```sql
-CREATE DATABASE database_name;
-```
+-- Create a new database
+CREATE DATABASE librarydb;
 
-2. To view all databases on the server:
-```sql
+-- Create a new user
+CREATE USER 'library_user'@'localhost' IDENTIFIED BY 'your_secure_password';
+
+-- Grant privileges
+GRANT ALL PRIVILEGES ON librarydb.* TO 'library_user'@'localhost';
+FLUSH PRIVILEGES;
+
+-- View all databases
 SHOW DATABASES;
 ```
 
-3. To create a new user:
-```sql
-USE database_name;
-CREATE USER 'user_name'@'localhost' IDENTIFIED BY 'user_password';
-GRANT ALL PRIVILEGES ON database_name.* TO 'user_name'@'localhost';
-FLUSH PRIVILEGES;
+### Fix File Permission Errors (if any):
+```bash
+sudo chmod 644 /var/www/html/database/librarydb.sql
+```
+
+> Check file permissions:
+```bash
+ls -l /var/www/html/database/
 ```
 
 ---
 
-### Verify Permissions
+## Backend Configuration
 
-Ensure correct file permissions:
-**Database**
-if you get a "Can't open file" error, make sure the file path is correct and accessible by your user (usually root).
-Try fixing it in the terminal with:
-```sh
-sudo chmod 644 /var/www/html/database/librarydb.sql
-```
+Ensure your web files are located at `/var/www/html/` and are accessible by the Apache web server:
 
-If using dietpi, check file permissions with:
-```sh
-ls -l /var/www/html/database/
-```
-
-**Backend**
-
-Ensure your files are in /var/www/html/ and set the correct permissions so Apache can read them:
-```sh
+```bash
 sudo chmod -R 755 /var/www/html
 sudo chown -R www-data:www-data /var/www/html
 ```
@@ -71,60 +66,65 @@ sudo chown -R www-data:www-data /var/www/html
 
 ## Maintenance Guidelines
 
-### 1. Backup the Database
+### 1. Secure the Application
 
-To back up the database:
+- Change default database credentials
+- Use `.htaccess` to restrict sensitive folders
+- Set file permissions to read-only when appropriate
+- Keep OS and packages updated
+
+### 2. Backup the Database
+
+**Option 1 – Simple Manual Backup:**
 ```bash
 cd /var/www/html/database
 mysqldump -u root -p librarydb > backup_librarydb.sql
 ```
-Then enter your password when prompted.
 
-### 2. Check Logs and Metrics
+**Option 2 – Timestamped Backup:**
+```bash
+mkdir -p /var/backups/sharklibrary
+mysqldump -u root -p librarydb > /var/backups/sharklibrary/librarydb_$(date +%Y%m%d).sql
+```
 
-Monitor Apache logs:
+### 3. Monitor Logs and Stats
 
+**Apache Logs:**
 ```bash
 sudo tail -f /var/log/apache2/error.log
 ```
 
-Track visit and download statistics via the database table `librarydb`.
+**Track Usage:**
+- Visit and download stats are stored in the `librarydb` database.
 
-### 3. Update Library Content
+### 4. Update Library Content
 
-To add or update books:
-
-- Add new PDFs to `/var/www/html/books/`
-- Add corresponding cover images to `/images/covers/`
-- Update any necessary details in the database manually though MariaDB or via PHP scripts
-
-### 4. Secure the Application
-
-- Change the default database password
-- Keep the OS and packages up to date
-- Restrict sensitive folders using `.htaccess`
-- Consider setting file permissions to read-only where appropriate
+- Add PDFs to: `/var/www/html/books/`
+- Add cover images to: `/var/www/html/images/covers/`
+- Update metadata in the database via MariaDB or PHP scripts
 
 ### 5. Test After Changes
 
-After changes or updates, always verify that:
-
+Always verify after updates:
 - All web pages load correctly
-- PDF downloads and comments work
-- Visit and download counters increment as expected
+- PDF downloads function
+- Comment system works
+- Visit/download counters increment
 
 ---
 
-## Summary
+## 🔍 Summary Table
 
-| Task | Command or Location |
-|------|----------------------|
-| Apache Root Directory| `/var/www/html/` |
-| Database Import | `librarydb.sql` |
-| Logs | `/var/log/apache2/error.log` |
-| Book Files | `/books/` and `/images/covers/` |
-| Access Site | `http://raspberrypiIP` |
+| Task                    | Command or Location                        |
+|-------------------------|--------------------------------------------|
+| Apache Root Directory   | `/var/www/html/`                           |
+| Database Import         | `librarydb.sql`                            |
+| Logs                    | `/var/log/apache2/error.log`               |
+| Book Files              | `/books/`, `/images/covers/`               |
+| Access Site             | `http://raspberrypiIP`                     |
 
 ---
 
-For further help, contact the project maintainers.
+## Need Help?
+
+For additional questions or community support, consider documenting custom scripts or edge cases for future admins.
